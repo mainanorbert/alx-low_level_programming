@@ -1,12 +1,10 @@
 #include<stdio.h>
 
 /**
- * main-entry point for the program
+ * main-where the program starts
  *
- *Description: Put function outputs message to console
- *
- *Return: Always 0 (Success)
- * /
+ * Return:AlwaySuccess)
+ */
 int main(void)
 {
 	puts("\"Programming is like building a multilingual puzzle");
