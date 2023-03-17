@@ -1,7 +1,6 @@
 #include <stdio.h>
 
 /**
- *
  * main - The program starts at main function
  *
  * Return: the program returns 0
