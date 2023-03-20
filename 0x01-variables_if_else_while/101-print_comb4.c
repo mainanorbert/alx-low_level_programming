@@ -1,26 +1,28 @@
 #include <stdio.h>
-
 /**
  * main - the entry point of the program
  *
- * Return: the program returns 0
+ * Return: The program returns 0(success)
  */
 int main(void)
 {
 	int i, j, k;
 
-	for (i = '0'; i <= '9'; i++)
+	i = 48;
+	j = 48;
+	k = 48;
+	for (i = 48; i < 58; i++)
 	{
-		for (j = '0'; j <= '9'; i++)
+		for (j = i + 1; j < 58; j++)
 		{
-			for (k = '0'; k <= '9'; k++)
+			for (k = j + 1; k < 58; k++)
 			{
-				if (i >= j && j >= k)
+				if (i > j && j > k)
 					continue;
 				putchar(i);
 				putchar(j);
 				putchar(k);
-				if (i == '7' && j == '8' && k == '9')
+				if (i == 55 && j == 56 && k == 57)
 					continue;
 				putchar(',');
 				putchar(' ');
