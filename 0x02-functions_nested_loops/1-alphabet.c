@@ -1,5 +1,4 @@
-#include "main.h" 
-
+#include "main.h"
 /**
  * print_alphabet - the program starts hear
  *
