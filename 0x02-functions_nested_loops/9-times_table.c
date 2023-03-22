@@ -14,7 +14,6 @@ void times_table(void)
 			prod = x * y;
 			if (prod < 10)
 			{
-				_putchar(' ');
 				_putchar((prod % 10) + '0');
 				if (y != 9)
 {
@@ -30,7 +29,6 @@ void times_table(void)
 				{
 				_putchar(',');
 }
-				_putchar(' ');
 }
 }
 _putchar('\n');
