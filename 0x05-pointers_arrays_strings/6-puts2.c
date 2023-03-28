@@ -1,16 +1,17 @@
 #include "main.h"
+#include <string.h>
 /**
  * puts2 - prints every character of string
  * @str: pointer to a string
  */
 void puts2(char *str)
 {
-	int i = 0;
+	int len = strlen(str);
+	int i;
 
-	while (str[i] != '\0')
+	for (i = 0; i <= len - 1; i += 2)
 	{
 		_putchar(str[i]);
-		i += 2;
 	}
 	_putchar('\n');
 }
