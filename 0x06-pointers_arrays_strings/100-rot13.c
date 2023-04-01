@@ -7,8 +7,8 @@
 char *rot13(char *str)
 {
 	int i = 0;
-	char minus[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-	char mayus[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
+	char minus[52] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	char mayus[52] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
 
 	while (str[i] != '\0')
 	{
@@ -25,6 +25,6 @@ char *rot13(char *str)
 		}
 		i++;
 	}
-	str[i] = '\n';
+	str[i] = '\0';
 	return (str);
 }
