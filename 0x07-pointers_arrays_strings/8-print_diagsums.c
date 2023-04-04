@@ -10,8 +10,9 @@ void print_diagsums(int *a, int size)
 
 	for (x = 0; x < size; x++)
 	{
-		mysum1 += a[x * size + 1];
-		mysum2 += a[x * size + (size - x - 1)];
+		mysum1 += a[(x * size) + x];
+		mysum2 += a[(x + 1) * size - x - 1];
 	}
-	printf("%d, %d\n", mysum1, mysum2);
+	printf("%d, %d", mysum1, mysum2);
+	printf("\n");
 }
