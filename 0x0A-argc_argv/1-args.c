@@ -6,9 +6,9 @@
  * @argv: array of pointers to strings (arguments)
  * Return: returns 0 for success
  */
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
 	(void) argv;	/*suppresses compiler warnings*/
-	printf("%d\n", argc);
+	printf("%d\n", argc - 1);
 	return (0);
 }
