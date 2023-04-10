@@ -5,24 +5,18 @@
  * main - prints product of two numbers
  * @argc: number of arguments
  * @argv: array of pointers to string
+ * Return: returns 0 and 1 for success anf failure respec.
  */
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
-	int i, count = 0;
 	int prod;
-	
-	for (i = 1; i < argc; i++)
-	{
-		count++;
-	}
-	if (count == 2)
-	{
-		prod = atoi(argv[1]) * atoi(argv[2]);
-		printf("%d\n", prod);
-	}
-	else
+
+	if (argc != 3)
 	{
 		printf("Error\n");
+		return (1);
 	}
+	prod = atoi(argv[1]) * atoi(argv[2]);
+	printf("%d\n", prod);
 	return (0);
 }
