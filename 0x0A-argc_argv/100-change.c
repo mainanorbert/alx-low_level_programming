@@ -17,10 +17,10 @@ int main(int argc, char *argv[])
 	}
 
 	c = atoi(argv[1]);
-
 	if (c < 0)
 	{
 		printf("%d\n", 0);
+		return (1);
 	}
 	while (c > 0)
 	{
