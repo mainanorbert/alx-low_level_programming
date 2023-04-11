@@ -29,4 +29,5 @@ char *str_concat(char *s1, char *s2)
 	memcpy(mem_al, s1, len1);
 	memcpy(mem_al + len1, s2, len2 + 1);
 	return (mem_al);
+	free(mem_al);
 }
