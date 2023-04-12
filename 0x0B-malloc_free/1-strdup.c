@@ -12,7 +12,7 @@ char *_strdup(char *str)
 	size_t len = strlen(str) + 1;
 	char *mem_al;
 	
-	if (len == 1)
+	if (str == NULL)
 	{
 		return (NULL);
 	}
