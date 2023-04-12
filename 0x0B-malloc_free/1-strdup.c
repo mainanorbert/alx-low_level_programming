@@ -18,10 +18,12 @@ char *_strdup(char *str)
 	}
 
 	mem_al = (char *) malloc(sizeof(char) * len);
+
 	if (mem_al == NULL)
 	{
 		return (NULL);
 	}
 	memcpy(mem_al, str, len);
 	return (mem_al);
+	free(mem_al);
 }
