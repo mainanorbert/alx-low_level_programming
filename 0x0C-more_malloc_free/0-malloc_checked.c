@@ -9,12 +9,12 @@
  */
 void *malloc_checked(unsigned int b)
 {
-	void *m;
+	void *myptr;
 
-	m = malloc(b);
-	if (m == NULL)
+	myptr = malloc(b);
+	if (myptr == NULL)
 	{
 		exit(98);
 	}
-	return (m);
+	return (myptr);
 }
