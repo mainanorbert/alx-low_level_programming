@@ -28,11 +28,6 @@ int **alloc_grid(int width, int height)
 		arr[i] = (int *) malloc(sizeof(int *) * width);	/*al. mem. to row elmts.*/
 		if (arr[i] == NULL)	/*checks if memory is not alloacted*/
 		{
-			for (j = 0; j < i; j++)	/*loops to free previously allocated rows*/
-			{
-				free(arr[j]);
-			}
-			free(arr);	/*frees all memory previously allocated*/
 			return (NULL);
 		}
 		for (j = 0; j < width; j++)	/*initialized rows to 0*/
