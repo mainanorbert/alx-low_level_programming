@@ -9,21 +9,21 @@
  */
 char *_strdup(char *str)
 {
-	size_t len = strlen(str) + 1;
+	unsigned int i, len = strlen(str) + 1;
 	char *mem_al;
 
-	if (str == NULL)
+	if (!str)
 	{
 		return (NULL);
 	}
 
-	mem_al = (char *) malloc(sizeof(char) * len);
+	mem_al = malloc(sizeof(char) * len);
 
 	if (mem_al == NULL)
 	{
 		return (NULL);
 	}
-	memcpy(mem_al, str, len);
+	for (i = 0; i < len; i++)
+		mem_al[i] = str[i];
 	return (mem_al);
-	free(mem_al);
 }
