@@ -25,6 +25,6 @@ char *_strdup(char *str)
 	}
 	for (i = 0; i < len; i++)
 		mem_al[i] = str[i];
-	mem_al[len] = '\0';
+	mem_al[len  - 1] = '\0';
 	return (mem_al);
 }
