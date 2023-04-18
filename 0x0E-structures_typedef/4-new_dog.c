@@ -32,6 +32,7 @@ dog_t *new_dog(char *name, float age, char *owner)
 	if (!myptr->name || !myptr->owner)
 	{
 		free(myptr->name), free(myptr->owner), free(myptr);
+		return (NULL);
 	}
 	for (i = 0; i < len1; i++)
 		myptr->name[i] = name[i];
