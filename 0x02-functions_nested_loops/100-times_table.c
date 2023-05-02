@@ -7,6 +7,7 @@ void print_times_table(int n)
 {
 	int i = 0, j;
 	int prod;
+
 	if (n > 15)
 		return;
 
@@ -16,11 +17,15 @@ void print_times_table(int n)
 		while (j <= n)
 		{
 			prod = i * j;
-			printf("%3d", prod);
-			printf(j != n ? ", " : "");
+			print_decimal(prod);
+			if (j != n)
+			{
+			_putchar(',');
+			_putchar(' ');
+			}
 			j++;
 		}
-		printf("\n");
+		_putchar('\n');
 		i++;
 	}
 }
