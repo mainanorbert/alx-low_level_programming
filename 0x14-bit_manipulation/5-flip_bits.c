@@ -8,7 +8,7 @@
 unsigned int flip_bits(unsigned long int n, unsigned long int m)
 {
 	unsigned long int d;
-	int c = 0;
+	int count = 0;
 
 	d = n ^ m;	/* finds differing bits*/
 
@@ -19,3 +19,4 @@ unsigned int flip_bits(unsigned long int n, unsigned long int m)
 		d = d >> 1;
 	}
 	return (count);
+}
