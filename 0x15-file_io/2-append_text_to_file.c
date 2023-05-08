@@ -21,10 +21,10 @@ int append_text_to_file(const char *filename, char *text_content)
 		f_write = write(fd, text_content, strlen(text_content));
 		if (f_write == -1)
 		{
-			close(f_write);
+			close(fd);
 			return (-1);
 		}
 	}
-	close(f_write);
-	return (-1);
+	close(fd);
+	return (1);
 }
