@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 
 	if (argc != 3)
 	{
-		dprintf(STDERR_FILENO, "Usage: %s file_from file_to\n", argv[0]);
+		dprintf(STDERR_FILENO, "Usage: %s\n", "cp file_from file_to");
 		exit(97);
 	}
 	file_from = open(argv[1], O_RDONLY);
@@ -43,8 +43,8 @@ int main(int argc, char *argv[])
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d", file_from), exit(100);
 	if (close(file_to) == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d", file_to);
-		exit(100);
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d", file_to), exit(100);
 	}
+	close(bytes_r), close(bytes_w);
 	return (0);
 }
