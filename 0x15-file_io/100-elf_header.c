@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
 	int fd;
 	ssize_t file_r;
 	Elf64_Ehdr elf_h;
+	int j;
 
 	if (argc != 2)
 		exit(98);
@@ -27,4 +28,44 @@ int main(int argc, char *argv[])
 	{
 		exit (98);
 	}
+	printf("Magic:	");
+	for (j = 0; j < EI_NIDENT; J++)
+		printf("%02x", elf_h.e_ident[j]);
+	printf("\n");
+	printf("Class:			");
+	switch (elf_h.e_ident[EI_CLASS])
+	{
+		case ELFCLASSNONE: printf("none\n"); break;
+		case ELFCLASS32:	printf("ELF32\n"); break;
+		case ELFCLASS64:	printf("ELF64\n"); break;
+		default:	printf("<unknown>\n"); break;
+	}
+	printf("Data:			");
+	switch (elf_h.e_ident[EI_DATA]) {
+		case ELFDATANONE: printf("none\n"); break;
+		case ELFDATA2LSB: printf("2's complement, little endian\n"); break;
+		case ELFDATA2MSB: printf("2's complement, big endian\n"); break;
+		default:          printf("<unknown>\n"); break;
+	}
+	printf("Version:                           %d\n", elf_h.e_ident[EI_VERSION]);
+	printf("OS/ABI:                            ");
+	switch (elf_h.e_ident[EI_OSABI]) 
+	{
+		case ELFOSABI_NONE:         printf("UNIX System V ABI\n"); break;
+		case ELFOSABI_HPUX:         printf("HP-UX\n"); break;
+		case ELFOSABI_NETBSD:       printf("NetBSD\n"); break;
+		case ELFOSABI_LINUX:        printf("Linux\n"); break;
+		case ELFOSABI_SOLARIS:      printf("Solaris\n"); break;
+		case ELFOSABI_AIX:          printf("AIX\n"); break;
+		case ELFOSABI_IRIX:         printf("IRIX\n"); break;
+		case ELFOSABI_FREEBSD:      printf("FreeBSD\n"); break;
+		case ELFOSABI_TRU64:        printf("Compaq TRU64 UNIX\n"); break;
+		case ELFOSABI_MODESTO:      printf("Novell Modesto\n"); break;
+		case ELFOSABI_OPENBSD:      printf("OpenBSD\n"); break;
+		case ELFOSABI_OPENVMS:      printf("OpenVMS\n"); break;
+		case ELFOSABI_NSK:          printf("HP Non-Stop Kernel\n"); break;
+		default:			printf("unkown"); break;
 
+    }
+    return (0);
+}
