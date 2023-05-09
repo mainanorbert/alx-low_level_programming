@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 	{
 		exit (98);
 	}
-	printf("Magic:	");
+	/*printf("Magic:	");
 	for (j = 0; j < EI_NIDENT; J++)
 		printf("%02x", elf_h.e_ident[j]);
 	printf("\n");
@@ -66,6 +66,6 @@ int main(int argc, char *argv[])
 		case ELFOSABI_NSK:          printf("HP Non-Stop Kernel\n"); break;
 		default:			printf("unkown"); break;
 
-    }
+    }*/
     return (0);
 }
