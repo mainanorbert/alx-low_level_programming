@@ -32,19 +32,18 @@ int main(int argc, char *argv[])
 	{
 		bytes_w = write(file_to, buffer, BUFFER_SIZE);
 		if (bytes_w == -1)
-		{
-			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-			exit(99);
-		}
+			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]), exit(99);
 	}
 	if (bytes_r == -1)
-		dprintf(STDERR_FILENO, "Error: Can't read from %s\n", argv[1]), exit(98);
+	{
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+		exit(98);
+	}
 	if (close(file_from) == -1)
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d", file_from), exit(100);
 	if (close(file_to) == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d", file_to), exit(100);
 	}
-	close(bytes_r), close(bytes_w);
 	return (0);
 }
