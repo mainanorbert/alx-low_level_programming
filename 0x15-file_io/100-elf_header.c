@@ -1,4 +1,9 @@
-#include "main.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <string.h>
+#include <elf.h>
 /**
  * error_func - prints error message*
  * @message: error message
@@ -17,7 +22,7 @@ void magic_func(const Elf64_Ehdr *h)
 	int i;
 
 	printf("ELF Header:\n");
-	printf("Magic:");
+	printf("Magic:	");
 	for (i = 0; i < EI_NIDENT; ++i)
 	{
 		printf("%02x ", h->e_ident[i]);
@@ -30,7 +35,7 @@ void magic_func(const Elf64_Ehdr *h)
  */
 void print_c_d(const Elf64_Ehdr *h)
 {
-	printf("Class:");
+	printf("Class:				");
 	switch (h->e_ident[EI_CLASS])
 	{
 		case ELFCLASSNONE:
@@ -43,7 +48,7 @@ void print_c_d(const Elf64_Ehdr *h)
 			printf("ELF64\n");
 			break;
 	}
-	printf("Data:");
+	printf("Data:				");
 	switch (h->e_ident[EI_DATA])
 	{
 		case ELFDATANONE:
@@ -56,7 +61,7 @@ void print_c_d(const Elf64_Ehdr *h)
 			printf("2's complement, big-endian\n");
 			break;
 	}
-	printf("Version: %d (current)\n", h->e_ident[EI_VERSION]);
+	printf("Version:			%d (current)\n", h->e_ident[EI_VERSION]);
 }
 /**
  * print_v - OS/ABI
@@ -64,7 +69,7 @@ void print_c_d(const Elf64_Ehdr *h)
  */
 void print_v(const Elf64_Ehdr *h)
 {
-	printf("OS/ABI: ");
+	printf("OS/ABI:				");
 	switch (h->e_ident[EI_OSABI])
 	{
 		case ELFOSABI_SYSV:
@@ -111,8 +116,8 @@ void print_v(const Elf64_Ehdr *h)
  */
 void print_elf_h(const Elf64_Ehdr *h)
 {
-	printf("ABI Version: %d\n", h->e_ident[EI_ABIVERSION]);
-	printf("Type:");
+	printf("ABI Version:			%d\n", h->e_ident[EI_ABIVERSION]);
+	printf("Type:				");
 	switch (h->e_type)
 	{
 		case ET_NONE:
@@ -122,7 +127,7 @@ void print_elf_h(const Elf64_Ehdr *h)
 			printf("Relocatable file\n");
 			break;
 		case ET_EXEC:
-			printf("Executable file\n");
+			printf("EXEC (Executable file)\n");
 			break;
 		case ET_DYN:
 			printf("Shared object file\n");
@@ -134,7 +139,7 @@ void print_elf_h(const Elf64_Ehdr *h)
 			printf("<unknown>\n");
 			break;
 	}
-	printf("Entry point address: 0x%lx\n", h->e_entry);
+	printf("Entry point address:		0x%lx\n", h->e_entry);
 }
 /**
  * main - entry point
