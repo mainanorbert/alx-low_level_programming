@@ -1,71 +1,176 @@
 #include "main.h"
-
 /**
- * main - entry point of the program
- * @argc: no of arguments
- * @argv: array of arguments strings
+ * error_func - prints error message*
+ * @message: error message
+ */
+void error_func(const char *message)
+{
+	fprintf(stderr, "%s\n", message);
+	exit(98);
+}
+/**
+ * magic_func - prints magic values
+ * @h: elf header
+ */
+void magic_func(const Elf64_Ehdr *h)
+{
+	int i;
+
+	printf("ELF Header:\n");
+	printf("Magic:");
+	for (i = 0; i < EI_NIDENT; ++i)
+	{
+		printf("%02x ", h->e_ident[i]);
+	}
+	printf("\n");
+}
+/**
+ * print_c_d - class code
+ * @h: elf header
+ */
+void print_c_d(const Elf64_Ehdr *h)
+{
+	printf("Class:");
+	switch (h->e_ident[EI_CLASS])
+	{
+		case ELFCLASSNONE:
+			printf("Invalid class\n");
+			break;
+		case ELFCLASS32:
+			printf("ELF32\n");
+			break;
+		case ELFCLASS64:
+			printf("ELF64\n");
+			break;
+	}
+	printf("Data:");
+	switch (h->e_ident[EI_DATA])
+	{
+		case ELFDATANONE:
+			printf("Invalid data encoding\n");
+			break;
+		case ELFDATA2LSB:
+			printf("2's complement, little-endian\n");
+			break;
+		case ELFDATA2MSB:
+			printf("2's complement, big-endian\n");
+			break;
+	}
+	printf("Version: %d (current)\n", h->e_ident[EI_VERSION]);
+}
+/**
+ * print_v - OS/ABI
+ * @h: elf header
+ */
+void print_v(const Elf64_Ehdr *h)
+{
+	printf("OS/ABI: ");
+	switch (h->e_ident[EI_OSABI])
+	{
+		case ELFOSABI_SYSV:
+			printf("UNIX - System V\n");
+			break;
+		case ELFOSABI_HPUX:
+			printf("UNIX - HP-UX\n");
+			break;
+		case ELFOSABI_NETBSD:
+			printf("UNIX - NetBSD\n");
+			break;
+		case ELFOSABI_LINUX:
+			printf("UNIX - Linux\n");
+			break;
+		case ELFOSABI_SOLARIS:
+			printf("UNIX - Solaris\n");
+			break;
+		case ELFOSABI_AIX:
+			printf("UNIX - AIX\n");
+			break;
+		case ELFOSABI_IRIX:
+			printf("UNIX - IRIX\n");
+			break;
+		case ELFOSABI_FREEBSD:
+			printf("UNIX - FreeBSD\n");
+			break;
+		case ELFOSABI_TRU64:
+			printf("UNIX - TRU64\n");
+			break;
+		case ELFOSABI_MODESTO:
+			printf("Novell - Modesto\n");
+			break;
+		case ELFOSABI_OPENBSD:
+			printf("UNIX - OpenBSD\n");
+			break;
+		default:
+			printf("<unknown>\n");
+			break;
+	}
+}
+/**
+ * print_elf_h - prints ABI version
+ * @h: header of elf
+ */
+void print_elf_h(const Elf64_Ehdr *h)
+{
+	printf("ABI Version: %d\n", h->e_ident[EI_ABIVERSION]);
+	printf("Type:");
+	switch (h->e_type)
+	{
+		case ET_NONE:
+			printf("No file type\n");
+			break;
+		case ET_REL:
+			printf("Relocatable file\n");
+			break;
+		case ET_EXEC:
+			printf("Executable file\n");
+			break;
+		case ET_DYN:
+			printf("Shared object file\n");
+			break;
+		case ET_CORE:
+			printf("Core file\n");
+			break;
+		default:
+			printf("<unknown>\n");
+			break;
+	}
+	printf("Entry point address: 0x%lx\n", h->e_entry);
+}
+/**
+ * main - entry point
+ * @argc: argument count
+ * @argv: array o arguments
  * Return: 0 for success
  */
 int main(int argc, char *argv[])
 {
+	Elf64_Ehdr h;
+	const char *filename = argv[1];
 	int fd;
-	ssize_t file_r;
-	Elf64_Ehdr elf_h;
-	int j;
+	ssize_t bytes_read;
 
 	if (argc != 2)
-		exit(98);
-	fd = open(argv[1], O_RDONLY);
+	{
+		error_func("Usage: elf_header elf_filename");
+	}
+	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		exit(98);
-	file_r = read(fd, &elf_h, sizeof(Elf64_Ehdr));
-	if (file_r != sizeof(Elf64_Ehdr))
-			exit(98);
-	if (elf_h.e_ident[EI_MAG0] != ELFMAG0 ||
-		elf_h.e_ident[EI_MAG1] != ELFMAG1 ||
-		elf_h.e_ident[EI_MAG2] != ELFMAG2 ||
-		elf_h.e_ident[EI_MAG3] != ELFMAG3)
 	{
-		exit (98);
+		error_func("Failed to open the file.");
 	}
-	/*printf("Magic:	");
-	for (j = 0; j < EI_NIDENT; J++)
-		printf("%02x", elf_h.e_ident[j]);
-	printf("\n");
-	printf("Class:			");
-	switch (elf_h.e_ident[EI_CLASS])
+	bytes_read = read(fd, &h, sizeof(h));
+	if (bytes_read != sizeof(h))
 	{
-		case ELFCLASSNONE: printf("none\n"); break;
-		case ELFCLASS32:	printf("ELF32\n"); break;
-		case ELFCLASS64:	printf("ELF64\n"); break;
-		default:	printf("<unknown>\n"); break;
+		error_func("Failed to read the ELF header.");
 	}
-	printf("Data:			");
-	switch (elf_h.e_ident[EI_DATA]) {
-		case ELFDATANONE: printf("none\n"); break;
-		case ELFDATA2LSB: printf("2's complement, little endian\n"); break;
-		case ELFDATA2MSB: printf("2's complement, big endian\n"); break;
-		default:          printf("<unknown>\n"); break;
-	}
-	printf("Version:                           %d\n", elf_h.e_ident[EI_VERSION]);
-	printf("OS/ABI:                            ");
-	switch (elf_h.e_ident[EI_OSABI]) 
+	if (memcmp(h.e_ident, ELFMAG, SELFMAG) != 0)
 	{
-		case ELFOSABI_NONE:         printf("UNIX System V ABI\n"); break;
-		case ELFOSABI_HPUX:         printf("HP-UX\n"); break;
-		case ELFOSABI_NETBSD:       printf("NetBSD\n"); break;
-		case ELFOSABI_LINUX:        printf("Linux\n"); break;
-		case ELFOSABI_SOLARIS:      printf("Solaris\n"); break;
-		case ELFOSABI_AIX:          printf("AIX\n"); break;
-		case ELFOSABI_IRIX:         printf("IRIX\n"); break;
-		case ELFOSABI_FREEBSD:      printf("FreeBSD\n"); break;
-		case ELFOSABI_TRU64:        printf("Compaq TRU64 UNIX\n"); break;
-		case ELFOSABI_MODESTO:      printf("Novell Modesto\n"); break;
-		case ELFOSABI_OPENBSD:      printf("OpenBSD\n"); break;
-		case ELFOSABI_OPENVMS:      printf("OpenVMS\n"); break;
-		case ELFOSABI_NSK:          printf("HP Non-Stop Kernel\n"); break;
-		default:			printf("unkown"); break;
-
-    }*/
-    return (0);
+		error_func("Not an ELF file.");
+	}
+	magic_func(&h);
+	print_c_d(&h);
+	print_v(&h);
+	print_elf_h(&h);
+	close(fd);
+	return (0);
 }
