@@ -25,7 +25,7 @@ void magic_func(const Elf64_Ehdr *h)
 	printf("Magic:");
 	for (i = 0; i < EI_NIDENT; ++i)
 	{
-		printf("%02x ", h->e_ident[i]);
+		printf("%02x", h->e_ident[i]);
 	}
 	printf("\n");
 }
@@ -47,6 +47,9 @@ void print_c_d(const Elf64_Ehdr *h)
 		case ELFCLASS64:
 			printf("ELF64\n");
 			break;
+		default:
+			printf("<unknown>\n");
+			break;
 	}
 	printf("Data:");
 	switch (h->e_ident[EI_DATA])
@@ -60,7 +63,17 @@ void print_c_d(const Elf64_Ehdr *h)
 		case ELFDATA2MSB:
 			printf("2's complement, big-endian\n");
 			break;
+		default:
+			printf("<unknown>\n");
+			break;
 	}
+}
+/**
+ * print_version - prints elf version
+ * @h: header
+ */
+void print_version(const Elf64_Ehdr *h)
+{
 	printf("Version:%d (current)\n", h->e_ident[EI_VERSION]);
 }
 /**
@@ -174,8 +187,13 @@ int main(int argc, char *argv[])
 	}
 	magic_func(&h);
 	print_c_d(&h);
+	print_version(&h);
 	print_v(&h);
 	print_elf_h(&h);
-	close(fd);
+	if (close(fd) == -1)
+	{
+		dprintf(STDERR_FILENO, "Unable to close fd %d\n", fd);
+		exit(98);
+	}
 	return (0);
 }
