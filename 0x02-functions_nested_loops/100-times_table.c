@@ -8,7 +8,7 @@ void print_times_table(int n)
 	int i = 0, j;
 	int prod;
 
-	if (n > 15)
+	if (n < 0 || n > 15)
 		return;
 
 	while (i <= n)
@@ -29,4 +29,3 @@ void print_times_table(int n)
 		i++;
 	}
 }
-
