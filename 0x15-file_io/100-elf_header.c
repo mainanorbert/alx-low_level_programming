@@ -4,31 +4,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include <elf.h>
-/**
- * error_func - Function that prints error message*
- * @message: error message to display
- */
-void error_func(const char *message)
-{
-	fprintf(stderr, "%s\n", message);
-	exit(98);
-}
-/**
- * magic_function - prints magic values
- * @h: elf header
- */
-void magic_function(const Elf64_Ehdr *h)
-{
-	int x;
-
-	printf("ELF Header:\n");
-	printf("Magic:");
-	for (x = 0; x < EI_NIDENT; ++x)
-	{
-		printf("%02x", h->e_ident[x]);
-	}
-	printf("\n");
-}
+#include "main.h"
 /**
  * print_class_code - class code
  * @h: elf header
@@ -185,7 +161,7 @@ int main(int argc, char *agv[])
 	{
 		error_func("Not an ELF file.");
 	}
-	magic_function(&h);
+	magic_functions(&h);
 	print_class_code(&h);
 	print_version(&h);
 	print_v(&h);
