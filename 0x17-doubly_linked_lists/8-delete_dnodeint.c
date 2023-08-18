@@ -9,7 +9,9 @@ int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 {
 	dlistint_t *current = *head, *del_node;
 
-	if (*head == NULL || index < 0)
+	if (index < 0)
+		return (-1);
+	if (*head == NULL)
 		return (-1);
 	if (index == 0)
 	{
