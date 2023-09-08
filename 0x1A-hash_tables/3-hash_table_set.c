@@ -10,7 +10,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
 	hash_node_t *new_node;
 	unsigned long int idx, i;
-	char *value_cpy, *key_cpy, *f_v, *f_k;
+	char *value_cpy, *key_cpy;
 
 	if (ht == NULL || key == NULL || *key == '\0' || value == NULL)
 		return (0);
@@ -40,8 +40,5 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	new_node->value = value_cpy;
 	new_node->next = ht->array[idx];
 	ht->array[idx] = new_node;
-	f_v = value_cpy;
-	f_k = key_cpy;
-	free(f_v), free(f_k);
 	return (1);
 }
