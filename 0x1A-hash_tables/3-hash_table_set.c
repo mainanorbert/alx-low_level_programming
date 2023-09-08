@@ -10,7 +10,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
 	hash_node_t *new_node;
 	unsigned long int idx, i;
-	char *value_cpy, *key_cpy;
+	char *value_cpy = NULL, *key_cpy = NULL;
 
 	if (ht == NULL || key == NULL || *key == '\0' || value == NULL)
 		return (0);
