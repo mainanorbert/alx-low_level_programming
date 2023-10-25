@@ -34,18 +34,18 @@ click the links to jump to each section with explation on how each form was crea
 - rules: all
 	- The all rule builds your executable
 - variables: CC, SRC
-	- CC: the compiler to be used
-	-SRC: the .c files
+	- `CC:` the compiler to be used
+	- `SRC:` the .c files
 ### 2-Makefile
 - Requirements:
 	- name of the executable: school
 	- rules: all
 		-The all rule builds your executable
-	- variables: `CC`, `SRC`, `OBJ`, 1NAME`
-		`CC:` the compiler to be used
-		`SRC:` the .c files
-		`OBJ:` the .o files
-		`NAME:` the name of the executable
+	- variables: `CC`, `SRC`, `OBJ`, `NAME`
+		- `CC:` the compiler to be used
+		- `SRC:` the .c files
+		- `OBJ:` the .o files
+		- `NAME:` the name of the executable
 	- The all rule should recompile only the updated source files
 `	- You are not allowed to have a list of all the .o files
 ### 3-Makefile
@@ -57,7 +57,7 @@ click the links to jump to each section with explation on how each form was crea
 		- `oclean:` deletes the object files
 		- `fclean:` deletes all Emacs and Vim temporary files, the executable, and the object files
 		-`re:` forces recompilation of all source files
-	- variables: `CC`, `SRC`, `OBJ`, 1NAME`
+	- variables: `CC`, `SRC`, `OBJ`, `NAME`
 		- `CC:` the compiler to be used
 		- `SRC:` the .c files
 		- `OBJ:` the .o files
@@ -74,7 +74,7 @@ click the links to jump to each section with explation on how each form was crea
 		- `oclean:` deletes the object files
 		- `fclean:` deletes all Emacs and Vim temporary files, the executable, and the object files
 		-`re:` forces recompilation of all source files
-	- variables: `CC`, `SRC`, `OBJ`, 1NAME`
+	- variables: `CC`, `SRC`, `OBJ`, `NAME`
 		- `CC:` the compiler to be used
 		- `SRC:` the .c files
 		- `OBJ:` the .o files
