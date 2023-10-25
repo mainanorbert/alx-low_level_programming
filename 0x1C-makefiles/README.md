@@ -1,6 +1,6 @@
 # 0x1C. C - Makefiles
 ![Makefile](https://s3.amazonaws.com/intranet-projects-files/holbertonschool-low_level_programming/273/giphy-2.gif)
-The project is on `make utility` a software for managing and maintaining
+- The project is on `make utility` a software for managing and maintaining
 computer programs consisting many component files. The make utility
 automatically determines which pieces of a large program need to be
 recompiled, and issues commands to recompile them.
