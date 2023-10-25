@@ -11,7 +11,7 @@ CFLAGS = -Wall -Werror -Wextra -pedantic
 # Make might mistakenly interpret them as file names.
 
 all: $(OBJ) m.h
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
+	$(CC) -o $(NAME) $(OBJ)
 
 clean:
 	$(RM) $(NAME) *~
