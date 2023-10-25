@@ -16,8 +16,8 @@ rules
 3. Dependency rules
 
 ## Explanation for each file
-[0-Makefile](#0-Makefile)
-[1-Makefile](#1-Makefile)
+[0-Makefile](#0-makefile)
+[1-Makefile](#1-makefile)
 
 
 ### 0-Makefile
