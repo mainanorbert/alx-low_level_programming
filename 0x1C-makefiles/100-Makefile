@@ -4,6 +4,12 @@ OBJ = $(SRC:.c=.o)
 NAME = school
 RM = rm -f
 CFLAGS = -Wall -Werror -Wextra -pedantic
+
+.PHONY: all clean oclean fclean re
+# specifies that "all," "clean," "oclean," "fclean," and "re"
+# are phony targets to prevent issues where 
+# Make might mistakenly interpret them as file names.
+
 all: $(OBJ) m.h
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
 
@@ -16,6 +22,3 @@ oclean:
 fclean: clean oclean
 
 re: fclean all
-
-# specifies that "all," "clean," "oclean," "fclean," and "re" are phony targets to prevent issues where Make might mistakenly interpret them as file names.
-.PHONY: all clean oclean fclean re
