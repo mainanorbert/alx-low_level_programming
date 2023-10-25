@@ -16,3 +16,6 @@ oclean:
 fclean: clean oclean
 
 re: fclean all
+
+# specifies that "all," "clean," "oclean," "fclean," and "re" are phony targets to prevent issues where Make might mistakenly interpret them as file names.
+.PHONY: all clean oclean fclean re
