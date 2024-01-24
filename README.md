@@ -9,6 +9,6 @@ The repository contains all codes on various C functions, i.e.,
 This repository was created by [Maina Norbert](https://twitter.com/mainanorbert2)
 
 
-# Th repository directories
+# The repository directories
  The repository has 18 directories dedicated to specific features of C
 
